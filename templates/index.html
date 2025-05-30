@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>برنامه‌ریز هوشمند</title>
+    <style>
+        body { font-family: Tahoma, sans-serif; direction: rtl; background: #f4f4f4; padding: 20px; }
+        table.data { border-collapse: collapse; width: 100%; background: white; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+        button { background-color: #007bff; color: white; padding: 10px 15px; margin: 10px 0; border: none; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <h2>برنامه‌ریز هوشمند کلاس‌ها</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">📥 بارگذاری فایل اکسل</button>
+    </form>
+
+    {% if table %}
+        <div>
+            {{ table|safe }}
+        </div>
+        <form method="POST" action="/download-pdf">
+            <input type="hidden" name="html" value="{{ table|safe }}">
+            <button type="submit">📄 دانلود PDF</button>
+        </form>
+        {% if filename %}
+            <a href="/download-excel/{{ filename }}"><button>📊 دانلود Excel</button></a>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
